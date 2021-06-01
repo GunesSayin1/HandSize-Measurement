@@ -1,2 +1,2 @@
-# CVIP Main Assignment
+# CVIP
 ## Hand Size Measurement using PPM (Pixel Per Metric)
