@@ -3,8 +3,8 @@
 This application measures the different parameters of the hand by using Image Processing and Computer Vision technologies. 
 
 Example output can be seen below:
+![download (4)](https://user-images.githubusercontent.com/62821891/120564544-7023a280-c40b-11eb-8aac-78c61e9de6c0.png)
 
-![hand](https://user-images.githubusercontent.com/62821891/120560117-7cefc880-c402-11eb-94c3-8ec772205921.png)
 
 
 ### Reproducing Results
