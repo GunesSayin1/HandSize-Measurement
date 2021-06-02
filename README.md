@@ -4,7 +4,8 @@ This application measures the different parameters of the hand by using Image Pr
 
 Example output can be seen below:
 
-![hand](https://user-images.githubusercontent.com/62821891/120557735-a9094a80-c3fe-11eb-9ff1-7ad2548693e9.png)
+![hand](https://user-images.githubusercontent.com/62821891/120560117-7cefc880-c402-11eb-94c3-8ec772205921.png)
+
 
 ### Reproducing Results
 
