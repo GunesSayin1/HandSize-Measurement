@@ -1,6 +1,3 @@
-# CVIP Main Assignment
-## _Gunes Sayin_
-
 ## Basic Overview
 
 This application measures the different parameters of the hand by using Image Processing and Computer Vision technologies. 
