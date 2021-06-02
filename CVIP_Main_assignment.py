@@ -378,7 +378,7 @@ class Hand_measurement:
         c = str(str(round(self.one_to_three(), 2)) + " cm")
         d = str(str(round(self.five_to_three(), 2)) + " cm")
 
-        df = {"Width": [a], "Length": [b], "3-5 Difference": [c], "1-3 Difference": [d]}
+        df = {"Width": [a], "Length": [b], "1-3 Difference": [c], "3-5 Difference": [d]}
         x = pd.DataFrame.from_dict(df)
         plt.imshow(cv2.cvtColor(self.image, cv2.COLOR_BGR2RGB))
 
