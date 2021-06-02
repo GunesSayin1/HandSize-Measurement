@@ -1,2 +1,2 @@
-# CVIP
-## Hand Size Measurement using PPM (Pixel Per Metric)
+# CVIP Main Assignment
+## _Gunes Sayin_
