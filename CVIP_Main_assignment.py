@@ -2,7 +2,6 @@ import numpy as np
 import cv2
 import matplotlib.pyplot as plt
 from imutils import grab_contours
-import imutils
 import pandas as pd
 
 
@@ -186,14 +185,14 @@ class Hand_measurement:
 
         count = 0
         if self.side.lower() == "left":
-            for i in self.fingers:
+            for i in self.fingers[::-1]:
                 cv2.circle(self.image, tuple(i), 16, [0, 0, 255], -1)
                 count += 1
                 cv2.putText(self.image, str(count), tuple(i), cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 255, 255), 2,
                             cv2.LINE_AA)
 
         if self.side.lower() == "right":
-            for i in self.fingers[::-1]:
+            for i in self.fingers:
                 cv2.circle(self.image, tuple(i), 16, [0, 0, 255], -1)
                 count += 1
                 cv2.putText(self.image, str(count), tuple(i), cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 255, 255), 2,
