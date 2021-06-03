@@ -2,9 +2,14 @@ import numpy as np
 import cv2
 import matplotlib.pyplot as plt
 from imutils import grab_contours
+import imutils
 import pandas as pd
+import csv
+import os
 
 
+
+pd.options.mode.chained_assignment = None
 class Hand_measurement:
     """
     A class to include all hand measurement related functions.
@@ -58,6 +63,7 @@ class Hand_measurement:
             th_up (int, optional): Upper threshold limit. Defaults to 255.
         """
         self.side = side
+        self.filename = str(image)
         self.image = cv2.imread(image)
         self.threshold_upper = th_up
         self.threshold_lower = th_low
@@ -182,9 +188,9 @@ class Hand_measurement:
         Draws circles to the finger tips of the image. Also labels them according to the side of hand.
 
         """
-
         count = 0
         if self.side.lower() == "left":
+            
             for i in self.fingers[::-1]:
                 cv2.circle(self.image, tuple(i), 16, [0, 0, 255], -1)
                 count += 1
@@ -365,9 +371,33 @@ class Hand_measurement:
         cv2.putText(self.image, str(str(round(distance, 2)) + " cm"),
                     tuple((top_corner[0], int(top_corner[1] * 0.97))), cv2.FONT_HERSHEY_SIMPLEX, 2.4, (255, 255, 255),
                     5, cv2.LINE_AA)
-
+    
         return distance
-
+    
+    def csv_measurements(self,csvname):
+        """
+        Writes the measurements to a csv file
+        """
+        #Measurements
+        a = str(str(round(self.hand_width(), 2)) + " cm")
+        b = str(str(round(self.hand_length(), 2)) + " cm")
+        c = str(str(round(self.one_to_three(), 2)) + " cm")
+        d = str(str(round(self.five_to_three(), 2)) + " cm")
+        
+        #Conditional variable to write headers one
+        file_exists = os.path.isfile(csvname)
+        
+        with open(csvname, 'a', newline="") as csvfile:
+            #Columns
+            fieldnames = ["file_name", 'hand_width',"hand_length","One_to_three_difference","Five_to_three_difference"]
+            
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+            
+            if not file_exists:
+                writer.writeheader()  # file doesn't exist yet, write a header
+            writer.writerow({'file_name': self.filename,'hand_width': a,'hand_length':b,'One_to_three_difference':c,'Five_to_three_difference':d})
+        return
+    
     def plot_table(self):
         """
         Applies previous methods to the image, and creates a table with these values.
@@ -415,7 +445,35 @@ class Hand_measurement:
 
         return
 
+    @staticmethod
+    def quality(csv,reasonable=True):
+        '''Filters only images with reasonable or good quality from given csv file
+
+        Parameters:
+            csv(string): Name of csv file as string. If file is not in project directory relative path should be specified.
+            reasonable(boolean): Argument to include reasonable quality images or not. Includes by default
+        Returns:
+            ldfnew(dataframe): Dataframe only containing images with reasonable or good quality.
+
+        '''
+        
+        df=pd.read_csv(csv) #read csv
+        pathed_image=[]
+        if reasonable == True:
+            dfnew = df[df['Quality'] != 'bad'] #filter only images with quality not equal to bad (Reasonable,good)
+        if reasonable == False:
+            dfnew = df[df['Quality'] == 'good'] #filter only images with good quality
+            
+        for index in range(len(dfnew["file name"])):
+            pathed_image.append(os.path.join("handscans", list(dfnew["file name"])[index])) #Adding path to the image name
+            
+        dfnew["path"] = pathed_image #Creating new column with relative path of the image
+        
+        return dfnew
+
+
 #Example
-newhand = Hand_measurement("Image (9).jpg", "left",19,255)
-plt.figure(figsize=(25,25))
-newhand.plot_table()
+
+# newhand = Hand_measurement("handscans/Image (9).jpg", "left",19,255)
+# plt.figure(figsize=(25,25))
+# newhand.plot_table()
