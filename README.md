@@ -11,17 +11,13 @@ Example output can be seen below:
 ###### Directory Structure
 
 ```
-CVIP_Main_Assignment_Gunes
+Hand_Measurement
 ├── handscans                  #Folder containing handscan csv and images
 │   └── handscans.csv
 │   └── Image .jpg
 │   └── ...
 │ 
 ├── CVIP_Main_Assignment.ipynb #Notebook file containing application code and examples
-├── CVIP_Main_Assignment.pdf   #PDF Version of notebook file
-├── CVIP_Main_assignment.py    #Python script version of the application
-├── Example Results .pdf       #Some example results without much code in PDF format
-├── requirements.txt           #pip requirements
 ├── CVIP_Main_Assignment.pdf   #PDF Version of notebook file with same name
 ├── CVIP_Main_assignment.py	   #Python script version of the application
 ├── Example Results .pdf       #Some example results without much code in PDF format
